@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f2f2f2;
+        }
+        .container {
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+        }
+        .login-box h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #666;
+        }
+        .login-box form {
+            display: flex;
+            flex-direction: column;
+        }
+        .user-box, .pass-box {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .user-box input, .pass-box input {
+            width: 100%;
+            padding: 10px 15px;
+            margin-top: 8px;
+            border: none;
+            outline: none;
+            background: #f2f2f2;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #333;
+        }
+        .user-box label, .pass-box label {
+            position: absolute;
+            top: 0;
+            left: 15px;
+            pointer-events: none;
+            transition: 0.5s;
+            color: #666;
+        }
+        .user-box input:focus ~ label, .pass-box input:focus ~ label {
+            top: -18px;
+            font-size: 12px;
+            color: #222;
+        }
+        .user-box input:valid ~ label, .pass-box input:valid ~ label {
+            top: -18px;
+            font-size: 12px;
+            color: #222;
+        }
+        .user-box input:focus, .pass-box input:focus {
+            background: #fff;
+        }
+        .user-box input:focus + .pass-box input {
+            background: #fff;
+        }
+        .user-box a {
+            position: absolute;
+            top: 0;
+            right: 0;
+            color: #666;
+            font-size: 12px;
+            padding: 10px 15px;
+            margin-top: 8px;
+            cursor: pointer;
+            transition: 0.5s;
+            text-decoration: none;
+        }
+        .user-box a:hover {
+            color: #222;
+        }
+        .user-box input:focus ~ a {
+            color: #222;
+        }
+        .user-box input:focus + .pass-box input + a {
+            color: #222;
+        }
+        .user-box input:valid ~ a {
+            color: #222;
+        }
+        .user-box input:valid + .pass-box input + a {
+            color: #222;
+        }
+        .user-box input:focus + .pass-box input + a {
+            color: #222;
+        }
+        .user-box input:focus + .pass-box input:focus + a {
+            color: #222;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px 15px;
+            margin-top: 20px;
+            background: #0095ff;
+            border: none;
+            outline: none;
+            color: #fff;
+            font-size: 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+        input[type="submit"]:hover {
+            background: #0062cc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-box">
+            <h1>Login</h1>
+            <form action="">
+                <div class="user-box">
+                    <input type="text" name="" required="">
+                    <label>Username</label>
+                </div>
+                <div class="pass-box">
+                    <input type="password" name="" required="">
+                    <label>Password</label>
+                </div>
+                <a href="#">Forgot password?</a>
+                <input type="submit" name="" value="Login">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
