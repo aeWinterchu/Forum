@@ -137,13 +137,25 @@
                     <label>Password</label>
                 </div>
                 <div class="pass-box">
-                    <input type="confirm_password" name="" required="">
+                    <input type="password" name="" required="">
                     <label>Confirm password</label>
                 </div>
                 <a href="login.html">Already have an account?</a>
-                <input type="submit" name="" value="Login">
+                <input type="submit" name="" value="Register">
             </form>
         </div>
     </div>
+    <script>
+        function validateForm() {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirmPassword").value;
+
+            if (password != confirmPassword) {
+                alert("Passwords do not match");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </body>
 </html>
