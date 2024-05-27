@@ -1,75 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Category</title>
+    <title>Create a Category</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+            text-align: center;
         }
-        .container {
-            max-width: 600px;
-            margin: 40px auto;
+        .category-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             padding: 20px;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            width: 300px;
+            margin: 40px auto;
         }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-control {
-            width: 100%;
-            height: 40px;
+        .category-form input[type="text"] {
             padding: 10px;
-            font-size: 18px;
+            margin: 10px;
             border: 1px solid #ccc;
         }
-        .btn {
-            background-color: #0095ff;
-            color: #fff;
+        .category-form input[type="submit"] {
             padding: 10px 20px;
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
+            background-color: #4CAF50;
+            color: #fff;
             cursor: pointer;
         }
-        .btn:hover {
-            background-color: #0062cc;
+        .category-form input[type="submit"]:hover {
+            background-color: #3e8e41;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Create Category</h2>
-        <form>
-            <div class="form-group">
-                <label for="category-name">Category Name:</label>
-                <input type="text" id="category-name" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="category-description">Category Description:</label>
-                <textarea id="category-description" class="form-control"></textarea>
-            </div>
-            <button class="btn">Create Category</button>
-        </form>
-        <div id="category-list"></div>
-
-        <script>
-            const form = document.querySelector("form");
-            const categoryList = document.getElementById("category-list");
-
-            form.addEventListener("submit", (e) => {
-                e.preventDefault();
-                const categoryName = document.getElementById("category-name").value;
-                const categoryDescription = document.getElementById("category-description").value;
-                const categoryHTML = `<h3>${categoryName}</h3><p>${categoryDescription}</p>`;
-                categoryList.innerHTML += categoryHTML;
-                form.reset();
-            });
-        </script>
-    </div>
+    <h1>Create a Category</h1>
+    <form class="category-form">
+        <label for="category-name">Category Name:</label>
+        <input type="text" id="category-name" name="category-name"><br><br>
+        <label for="category-description">Category Description:</label>
+        <input type="text" id="category-description" name="category-description"><br><br>
+        <input type="submit" value="Create Category">
+    </form>
 </body>
 </html>
