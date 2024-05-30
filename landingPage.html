@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum Home - Asian Food Theme</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #fff3e0;
+        }
+
+        .header {
+            background-color: #d32f2f;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        .nav {
+            background-color: #b71c1c;
+            overflow: hidden;
+            border-radius: 0 0 10px 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 5px;
+            margin: 0 5px;
+        }
+
+        .nav a:hover {
+            background-color: #d32f2f;
+        }
+
+        .header .user-profile, .header .search-icon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #d32f2f;
+            border: none;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .header .user-profile {
+            right: 20px;
+        }
+
+        .header .search-icon {
+            right: 330px;
+        }
+
+        .header .search-bar {
+            position: absolute;
+            top: 50%;
+            right: 70px;
+            transform: translateY(-50%);
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 5px;
+            width: 0;
+            opacity: 0;
+            transition: width 0.5s ease, opacity 0.5s ease;
+        }
+
+        .header .search-bar input {
+            border: none;
+            outline: none;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .header .search-icon:hover + .search-bar,
+        .header .search-bar:hover {
+            width: 250px;
+            opacity: 1;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .forum-section {
+            margin-bottom: 30px;
+        }
+
+        .forum-section h2 {
+            color: #d32f2f;
+            margin-bottom: 10px;
+        }
+
+        .forum-category {
+            display: inline-block;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 15px;
+            margin-right: 10px;
+        }
+
+        .forum-category h3 {
+            margin: 0;
+            font-size: 24px;
+            color: #b71c1c;
+        }
+
+        .forum-category p {
+            margin: 5px 0 0;
+            color: #757575;
+        }
+
+        .footer {
+            background-color: #d32f2f;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Asian'Gourmet</h1>
+        <a href="profil.html" class="user-profile"> <!-- Lien vers la page profil.html -->
+            <img src="https://img.icons8.com/material-outlined/24/ffffff/user.png" alt="Profile" class="icon">
+        </a>
+        <button class="search-icon">
+            <img src="https://img.icons8.com/material-outlined/24/ffffff/search.png" alt="Search" class="icon">
+        </button>
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+        </div>
+    </div>
+    <div class="nav">
+        <a href="#">Home</a>
+        <a href="chooseCategory.html">Categories</a> <!-- Lien vers la page chooseCategory.html -->
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </div>
+    <div class="container">
+        <div class="forum-section">
+            <h2>Popular Discussions</h2>
+            <div class="forum-category">
+                <h3>Sushi Recipes</h3>
+                <p>Discuss and share your favorite sushi recipes.</p>
+            </div>
+            <div class="forum-category">
+                <h3>Ramen Cooking Tips</h3>
+                <p>Get tips and tricks for making the perfect ramen at home.</p>
+            </div>
+        </div>
+        <div class="forum-section">
+            <h2>Recent Topics</h2>
+            <div class="forum-category">
+                <h3>Best Asian Restaurants</h3>
+                <p>Share and discover the best Asian restaurants around you.</p>
+            </div>
+            <div class="forum-category">
+                <h3>Ingredient Substitutes</h3>
+                <p>Find substitutes for hard-to-find ingredients in Asian cuisine.</p>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        &copy; 2024 Asian Food Forum. All rights reserved.
+    </div>
+</body>
+</html>
