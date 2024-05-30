@@ -69,41 +69,10 @@
         .user-box input:focus, .pass-box input:focus {
             background: #fff;
         }
-        .user-box input:focus + .pass-box input {
-            background: #fff;
-        }
-        .user-box a {
-            position: absolute;
-            top: 0;
-            right: 0;
-            color: #666;
+        .error-message {
+            color: red;
             font-size: 12px;
-            padding: 10px 15px;
-            margin-top: 8px;
-            cursor: pointer;
-            transition: 0.5s;
-            text-decoration: none;
-        }
-        .user-box a:hover {
-            color: #222;
-        }
-        .user-box input:focus ~ a {
-            color: #222;
-        }
-        .user-box input:focus + .pass-box input + a {
-            color: #222;
-        }
-        .user-box input:valid ~ a {
-            color: #222;
-        }
-        .user-box input:valid + .pass-box input + a {
-            color: #222;
-        }
-        .user-box input:focus + .pass-box input + a {
-            color: #222;
-        }
-        .user-box input:focus + .pass-box input:focus + a {
-            color: #222;
+            margin-top: 5px;
         }
         input[type="submit"] {
             width: 100%;
@@ -122,40 +91,75 @@
             background: #0062cc;
         }
     </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelector("form").onsubmit = async function(e) {
+                e.preventDefault();
+
+                const form = e.target;
+                const formData = new FormData(form);
+
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                document.getElementById("usernameError").textContent = "";
+                document.getElementById("emailError").textContent = "";
+                document.getElementById("passwordError").textContent = "";
+                document.getElementById("formError").textContent = "";
+
+                if (!response.ok) {
+                    if (result.usernameError) {
+                        document.getElementById("usernameError").textContent = result.usernameError;
+                    }
+                    if (result.emailError) {
+                        document.getElementById("emailError").textContent = result.emailError;
+                    }
+                    if (result.passwordError) {
+                        document.getElementById("passwordError").textContent = result.passwordError;
+                    }
+                    if (result.formError) {
+                        document.getElementById("formError").textContent = result.formError;
+                    }
+                } else {
+                    document.getElementById("formError").textContent = "Registration successful!";
+                }
+            }
+        });
+    </script>
 </head>
 <body>
     <div class="container">
         <div class="login-box">
             <h1>Register your account</h1>
-            <form action="">
+            <form action="/register" method="post">
                 <div class="user-box">
-                    <input type="text" name="" required="">
+                    <input type="text" name="username" required>
                     <label>Username</label>
+                    <div class="error-message" id="usernameError"></div>
+                </div>
+                <div class="user-box">
+                    <input type="email" name="email" required>
+                    <label>Email address</label>
+                    <div class="error-message" id="emailError"></div>
                 </div>
                 <div class="pass-box">
-                    <input type="password" name="" required="">
+                    <input type="password" id="password" name="password" required>
                     <label>Password</label>
                 </div>
                 <div class="pass-box">
-                    <input type="password" name="" required="">
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
                     <label>Confirm password</label>
+                    <div class="error-message" id="passwordError"></div>
                 </div>
                 <a href="login.html">Already have an account?</a>
-                <input type="submit" name="" value="Register">
+                <div class="error-message" id="formError" style="display: none;"></div>
+                <input type="submit" value="Register">
             </form>
         </div>
     </div>
-    <script>
-        function validateForm() {
-            var password = document.getElementById("password").value;
-            var confirmPassword = document.getElementById("confirmPassword").value;
-
-            if (password != confirmPassword) {
-                alert("Passwords do not match");
-                return false;
-            }
-            return true;
-        }
-    </script>
 </body>
 </html>
