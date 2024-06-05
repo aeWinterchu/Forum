@@ -6,15 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register Page</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
-        * {
+        body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Poppins', sans-serif;
-            /* Changement de l'arrière-plan pour l'image donnée */
+            font-family: 'Arial', sans-serif;
             background-image: url('https://tb-static.uber.com/prod/image-proc/processed_images/65a73d98fcac97d185bb474795a60f49/16bb0a3ab8ea98cfe8906135767f7bf4.jpeg');
             background-size: cover;
             background-position: center;
@@ -25,92 +20,77 @@
             align-items: center;
             height: 100vh;
         }
+
         .container {
-            max-width: 400px;
-            margin: 40px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 5px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-        }
-        .login-box h1 {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 350px;
+            max-width: 100%;
             text-align: center;
-            margin-bottom: 30px;
-            color: #666;
+            padding: 30px;
+            box-sizing: border-box;
         }
-        .login-box form {
-            display: flex;
-            flex-direction: column;
+
+        .container h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #d32f2f;
         }
-        .user-box, .pass-box {
-            position: relative;
+
+        .container img {
+            width: 100px;
+            height: auto;
             margin-bottom: 20px;
         }
-        .user-box input, .pass-box input {
+
+        .container input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .container button {
             width: 100%;
-            padding: 10px 15px;
-            margin-top: 8px;
+            padding: 10px;
+            background-color: #d32f2f;
             border: none;
-            outline: none;
-            background: #f2f2f2;
-            border-radius: 4px;
-            font-size: 14px;
-            color: #333;
-        }
-        .user-box label, .pass-box label {
-            position: absolute;
-            top: 0;
-            left: 15px;
-            pointer-events: none;
-            transition: 0.5s;
-            color: #666;
-        }
-        .user-box input:focus ~ label, .pass-box input:focus ~ label {
-            top: -18px;
-            font-size: 12px;
-            color: #222;
-        }
-        .user-box input:valid ~ label, .pass-box input:valid ~ label {
-            top: -18px;
-            font-size: 12px;
-            color: #222;
-        }
-        .user-box input:focus, .pass-box input:focus {
-            background: #fff;
-        }
-        .error-message {
-            color: red;
-            font-size: 12px;
-            margin-top: 5px;
-        }
-        input[type="submit"] {
-            width: 100%;
-            padding: 10px 15px;
-            margin-top: 20px;
-            background: #d32f2f;
-            border: none;
-            outline: none;
-            color: #fff;
-            font-size: 14px;
-            border-radius: 4px;
+            border-radius: 5px;
+            color: white;
+            font-size: 18px;
             cursor: pointer;
-            transition: 0.5s;
+            transition: background-color 0.3s ease;
         }
-        input[type="submit"]:hover {
-            background: #b71c1c;
+
+        .container button:hover {
+            background-color: #b71c1c;
         }
+
         .footer {
             margin-top: 20px;
             font-size: 14px;
             color: #757575;
         }
+
         .footer a {
             color: #d32f2f;
             text-decoration: none;
             transition: color 0.3s ease;
         }
+
         .footer a:hover {
             color: #b71c1c;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: -10px;
+            margin-bottom: 10px;
         }
     </style>
     <script>
@@ -155,33 +135,22 @@
 </head>
 <body>
     <div class="container">
-        <div class="login-box">
-            <h1>Register your account</h1>
-            <form action="/register" method="post">
-                <div class="user-box">
-                    <input type="text" name="username" required>
-                    <label>Username</label>
-                    <div class="error-message" id="usernameError"></div>
-                </div>
-                <div class="user-box">
-                    <input type="email" name="email" required>
-                    <label>Email address</label>
-                    <div class="error-message" id="emailError"></div>
-                </div>
-                <div class="pass-box">
-                    <input type="password" id="password" name="password" required>
-                    <label>Password</label>
-                </div>
-                <div class="pass-box">
-                    <input type="password" id="confirmPassword" name="confirmPassword" required>
-                    <label>Confirm password</label>
-                    <div class="error-message" id="passwordError"></div>
-                </div>
-                <a class="footer" href="login.html">Already have an account?</a>
-                <div class="error-message" id="formError" style="display: none;"></div>
-                <input type="submit" value="Register">
-            </form>
-        </div>
+        <img src="https://img.icons8.com/color/100/000000/sushi.png" alt="Sushi Icon">
+        <h1>Register your account</h1>
+        <form action="/register" method="post">
+            <input type="text" name="username" placeholder="Username" required>
+            <div class="error-message" id="usernameError"></div>
+            <input type="email" name="email" placeholder="Email address" required>
+            <div class="error-message" id="emailError"></div>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required>
+            <div class="error-message" id="passwordError"></div>
+            <div class="footer">
+                <a href="login.html">Already have an account?</a>
+            </div>
+            <div class="error-message" id="formError"></div>
+            <button type="submit">Register</button>
+        </form>
     </div>
 </body>
 </html>
