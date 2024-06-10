@@ -50,14 +50,12 @@ func registerHandler(w http.ResponseWriter, r *http.Request) {
 		confirmPassword := r.FormValue("confirmPassword")
 		username := r.FormValue("username")
 
-		// Vérifiez que les mots de passe correspondent
 		if password != confirmPassword {
 			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(map[string]string{"passwordError": "Passwords do not match"})
 			return
 		}
 
-		// Vérifiez si l'utilisateur ou l'email existe déjà
 		var emailExists, usernameExists bool
 		err := db.QueryRow("SELECT EXISTS(SELECT 1 FROM users WHERE email=?)", email).Scan(&emailExists)
 		if err != nil {
@@ -113,7 +111,7 @@ func registerHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 		w.WriteHeader(http.StatusCreated)
-		json.NewEncoder(w).Encode(map[string]string{"message": "User registered successfully"})
+		json.NewEncoder(w).Encode(map[string]string{"message": "User registered successfully", "redirect": "/login"})
 	} else {
 		tmpl, err := template.ParseFiles("register.html")
 		if err != nil {
@@ -127,25 +125,29 @@ func registerHandler(w http.ResponseWriter, r *http.Request) {
 
 func loginHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
-		email := r.FormValue("email")
+		login := r.FormValue("login")
 		password := r.FormValue("password")
 
 		var dbPassword, username string
-		err := db.QueryRow("SELECT password, username FROM users WHERE email = ?", email).Scan(&dbPassword, &username)
+		err := db.QueryRow("SELECT password, username FROM users WHERE email = ? OR username = ?", login, login).Scan(&dbPassword, &username)
 		if err != nil {
 			if err == sql.ErrNoRows {
-				http.Error(w, "User not found", http.StatusUnauthorized)
+				w.WriteHeader(http.StatusUnauthorized)
+				json.NewEncoder(w).Encode(map[string]string{"formError": "User not found"})
 			} else {
-				http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+				w.WriteHeader(http.StatusInternalServerError)
+				json.NewEncoder(w).Encode(map[string]string{"formError": "Internal Server Error"})
 				log.Println("Error querying user:", err)
 			}
 			return
 		}
 
 		if checkPasswordHash(password, dbPassword) {
-			fmt.Fprintf(w, "Welcome, %s!", username)
+			w.WriteHeader(http.StatusOK)
+			json.NewEncoder(w).Encode(map[string]string{"message": fmt.Sprintf("Welcome, %s!", username), "redirect": "/landingPage.html"})
 		} else {
-			http.Error(w, "Invalid credentials", http.StatusUnauthorized)
+			w.WriteHeader(http.StatusUnauthorized)
+			json.NewEncoder(w).Encode(map[string]string{"formError": "Invalid credentials"})
 		}
 	} else {
 		tmpl, err := template.ParseFiles("login.html")
@@ -165,8 +167,9 @@ func main() {
 	http.HandleFunc("/register", registerHandler)
 	http.HandleFunc("/login", loginHandler)
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+	http.Handle("/landingPage.html", http.FileServer(http.Dir(".")))
 
 	fmt.Println("Server is running on port 8080")
-	fmt.Println("http://localhost:8080/register?")
+	fmt.Println("http://localhost:8080/register")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
