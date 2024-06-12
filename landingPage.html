@@ -10,6 +10,7 @@
             padding: 0;
             font-family: 'Arial', sans-serif;
             background-color: #fff3e0;
+            color: #333;
         }
 
         .header {
@@ -18,6 +19,7 @@
             padding: 20px;
             text-align: center;
             position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .header h1 {
@@ -31,6 +33,9 @@
             border-radius: 0 0 10px 10px;
             display: flex;
             justify-content: center;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1;
         }
 
         .nav a {
@@ -42,15 +47,87 @@
             font-size: 18px;
             border-radius: 5px;
             margin: 0 5px;
+            transition: background-color 0.3s;
         }
 
         .nav a:hover {
             background-color: #d32f2f;
         }
 
-        .header .user-profile, .header .search-icon {
+        .create-category {
+            background-color: #f57c00;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 5px;
+            margin: 0 5px;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: background-color 0.3s;
+        }
+
+        .create-category:hover {
+            background-color: #ff9800;
+        }
+
+        .header .user-profile-container {
             position: absolute;
             top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        .header .user-profile {
+            background-color: #d32f2f;
+            border: none;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .header .user-profile:hover {
+            background-color: #b71c1c;
+        }
+
+        .header .user-profile:hover + .dropdown-content,
+        .dropdown-content:hover {
+            display: block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            right: 0;
+            top: 40px;
+            z-index: 20;
+            text-align: left;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            border-bottom: 1px solid #ddd;
+            transition: background-color 0.3s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .header .search-icon {
+            position: absolute;
+            top: 50%;
+            right: 330px;
             transform: translateY(-50%);
             background-color: #d32f2f;
             border: none;
@@ -58,14 +135,11 @@
             padding: 10px;
             cursor: pointer;
             border-radius: 50%;
+            transition: background-color 0.3s;
         }
 
-        .header .user-profile {
-            right: 20px;
-        }
-
-        .header .search-icon {
-            right: 330px;
+        .header .search-icon:hover {
+            background-color: #b71c1c;
         }
 
         .header .search-bar {
@@ -80,6 +154,8 @@
             width: 0;
             opacity: 0;
             transition: width 0.5s ease, opacity 0.5s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1;
         }
 
         .header .search-bar input {
@@ -106,6 +182,7 @@
         .forum-section h2 {
             color: #d32f2f;
             margin-bottom: 10px;
+            font-size: 28px;
         }
 
         .forum-category {
@@ -116,6 +193,12 @@
             padding: 20px;
             margin-bottom: 15px;
             margin-right: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .forum-category:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
         .forum-category h3 {
@@ -137,6 +220,7 @@
             position: fixed;
             bottom: 0;
             width: 100%;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .icon {
@@ -144,14 +228,32 @@
             height: 20px;
             vertical-align: middle;
         }
+
+        .pinterest-video {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 300px;
+            height: auto;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+        }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>Asian'Gourmet</h1>
-        <a href="profil.html" class="user-profile"> <!-- Lien vers la page profil.html -->
-            <img src="https://img.icons8.com/material-outlined/24/ffffff/user.png" alt="Profile" class="icon">
-        </a>
+        <div class="user-profile-container">
+            <button class="user-profile">
+                <img src="https://img.icons8.com/material-outlined/24/ffffff/user.png" alt="Profile" class="icon">
+            </button>
+            <div class="dropdown-content">
+                <a href="profile.html">Profile</a>
+                <a href="logout.html">Logout</a>
+            </div>
+        </div>
         <button class="search-icon">
             <img src="https://img.icons8.com/material-outlined/24/ffffff/search.png" alt="Search" class="icon">
         </button>
@@ -161,9 +263,10 @@
     </div>
     <div class="nav">
         <a href="#">Home</a>
-        <a href="chooseCategory.html">Categories</a> <!-- Lien vers la page chooseCategory.html -->
+        <a href="chooseCategory.html">Categories</a>
         <a href="#">About</a>
         <a href="#">Contact</a>
+        <a href="createCategory.html" class="create-category">Create Category</a>
     </div>
     <div class="container">
         <div class="forum-section">
