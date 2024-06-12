@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Post - Asian Food Forum</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-image: url('https://tb-static.uber.com/prod/image-proc/processed_images/65a73d98fcac97d185bb474795a60f49/16bb0a3ab8ea98cfe8906135767f7bf4.jpeg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .navbar {
+            width: 100%;
+            background-color: #b71c1c;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .navbar a:hover {
+            background-color: #f2f2f2;
+            color: #b71c1c;
+        }
+
+        .container {
+            max-width: 600px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            margin-top: 80px; /* Adjusted to avoid overlap with navbar */
+        }
+
+        h1 {
+            color: #d32f2f;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .form-group textarea {
+            width: calc(100% - 10px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            resize: vertical;
+            height: 150px;
+        }
+
+        .create-post-btn {
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            font-weight: bold;
+            outline: none;
+        }
+
+        .create-post-btn:hover {
+            background-color: #b71c1c;
+        }
+
+        .create-post-btn:active {
+            background-color: #8b0000;
+        }
+
+        .create-post-btn:focus {
+            box-shadow: 0 0 0 2px #b71c1c;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="categories.html">Categories</a>
+        <a href="profile.html">Profile</a>
+        <a href="createPost.html">Create Post</a>
+    </div>
+    <div class="container">
+        <h1>Create New Post</h1>
+        <form action="#">
+            <div class="form-group">
+                <label for="post-content">Content:</label>
+                <textarea id="post-content" name="post-content" required></textarea>
+            </div>
+            <button type="submit" class="create-post-btn">Create Post</button>
+        </form>
+    </div>
+</body>
+</html>
