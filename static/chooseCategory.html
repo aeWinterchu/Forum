@@ -18,6 +18,37 @@
             height: 100vh;
         }
 
+        .nav {
+            background-color: #b71c1c;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            padding: 8px 0; /* Ajustement de la taille de la barre de navigation */
+            border-bottom-left-radius: 10px; /* Arrondir le coin inférieur gauche */
+            border-bottom-right-radius: 10px; /* Arrondir le coin inférieur droit */
+        }
+
+        .nav a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 12px 20px; /* Ajustement de la taille des liens de navigation */
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 5px;
+            margin: 0 5px;
+            transition: background-color 0.3s;
+        }
+
+        .nav a:hover {
+            background-color: #d32f2f;
+        }
+
         .container {
             max-width: 800px;
             text-align: center;
@@ -25,6 +56,7 @@
             padding: 50px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            margin-top: 60px; /* Ajustement pour tenir compte de la barre de navigation */
         }
 
         h1 {
@@ -116,6 +148,12 @@
     </style>
 </head>
 <body>
+    <div class="nav">
+        <a href="landingPage.html">Home</a>
+        <a href="chooseCategory.html">Categories</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </div>
     <div class="container">
         <h1>Choose a Category</h1>
         <ul class="category-list" id="category-list">
