@@ -16,6 +16,26 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            background-color: #fff3e0;
+            color: #333;
+        }
+
+        .header {
+            background-color: #d32f2f;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1001;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+            color: white; /* Ensure text color is white */
         }
 
         .nav {
@@ -26,18 +46,18 @@
             width: 100%;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             position: fixed;
-            top: 0;
+            top: 80px; /* Adjusted to be closer to the header */
             z-index: 1000;
-            padding: 8px 0; /* Ajustement de la taille de la barre de navigation */
-            border-bottom-left-radius: 10px; /* Arrondir le coin inférieur gauche */
-            border-bottom-right-radius: 10px; /* Arrondir le coin inférieur droit */
+            padding: 8px 0;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
         }
 
         .nav a {
             display: block;
             color: white;
             text-align: center;
-            padding: 12px 20px; /* Ajustement de la taille des liens de navigation */
+            padding: 12px 20px;
             text-decoration: none;
             font-size: 18px;
             border-radius: 5px;
@@ -56,11 +76,11 @@
             padding: 50px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            margin-top: 60px; /* Ajustement pour tenir compte de la barre de navigation */
+            margin-top: 160px; /* Adjusted to be below the header and nav */
         }
 
         h1 {
-            color: #d32f2f;
+            color: #b71c1c; /* Same red as navbar */
             margin-bottom: 30px;
         }
 
@@ -145,9 +165,168 @@
         .create-category-btn:hover {
             background-color: #b71c1c;
         }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-content input {
+            width: 80%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .modal-content button {
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .modal-content button:hover {
+            background-color: #b71c1c;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            right: 0;
+            top: 40px;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            border-bottom: 1px solid #ddd;
+            transition: background-color 0.3s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .user-profile-container {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+        }
+
+        .user-profile {
+            background-color: #d32f2f;
+            border: none;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .user-profile:hover {
+            background-color: #b71c1c;
+        }
+
+        .user-profile:hover + .dropdown-content,
+        .dropdown-content:hover {
+            display: block;
+        }
+
+        .search-icon {
+            position: absolute;
+            top: 50%;
+            right: 70px;
+            transform: translateY(-50%);
+            background-color: #d32f2f;
+            border: none;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .search-icon:hover {
+            background-color: #b71c1c;
+        }
+
+        .search-bar {
+            position: absolute;
+            top: 50%;
+            right: 130px;
+            transform: translateY(-50%);
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 5px;
+            width: 0;
+            opacity: 0;
+            transition: width 0.5s ease, opacity 0.5s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-bar input {
+            border: none;
+            outline: none;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .search-icon:hover + .search-bar,
+        .search-bar:hover {
+            width: 200px;
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
+    <div class="header">
+        <h1>Asian'Gourmet</h1>
+        <div class="user-profile-container">
+            <button class="user-profile">
+                <img src="https://img.icons8.com/material-outlined/24/ffffff/user.png" alt="Profile">
+            </button>
+            <div class="dropdown-content">
+                <a href="/static/profile.html">Profile</a>
+                <a href="logout.html">Logout</a>
+            </div>
+        </div>
+        <button class="search-icon">
+            <img src="https://img.icons8.com/material-outlined/24/ffffff/search.png" alt="Search">
+        </button>
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+        </div>
+    </div>
     <div class="nav">
         <a href="../landingPage.html">Home</a>
         <a href="/chooseCategory.html">Categories</a>
@@ -157,25 +336,41 @@
     <div class="container">
         <h1>Choose a Category</h1>
         <ul class="category-list" id="category-list">
-            <!-- Categories will be inserted here by JavaScript -->
         </ul>
-        <a href="createCategory.html" class="create-category-btn">Create New Category</a>
+        <button class="create-category-btn" id="open-modal-btn">Create New Category</button>
+    </div>
+
+    <div class="modal" id="create-category-modal">
+        <div class="modal-content">
+            <h2>Create New Category</h2>
+            <input type="text" id="new-category-name" placeholder="Category Name">
+            <button id="save-category-btn">Save</button>
+        </div>
     </div>
 
     <script>
-        function loadCategories() {
-            const categories = JSON.parse(localStorage.getItem('categories')) || [];
-            const categoryList = document.getElementById('category-list');
-            categoryList.innerHTML = '';
-            categories.forEach(category => {
-                const listItem = document.createElement('li');
-                listItem.className = 'category-item';
-                listItem.innerHTML = `<a href="#" class="category-link"><span class="category-name">${category}</span></a>`;
-                categoryList.appendChild(listItem);
-            });
+        function openModal() {
+            document.getElementById('create-category-modal').style.display = 'flex';
         }
 
-        document.addEventListener('DOMContentLoaded', loadCategories);
+        function closeModal() {
+            document.getElementById('create-category-modal').style.display = 'none';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+        });
+
+        document.getElementById('open-modal-btn').addEventListener('click', openModal);
+
+        document.getElementById('save-category-btn').addEventListener('click', function() {
+            closeModal();
+        });
+
+        window.addEventListener('click', function(event) {
+            if (event.target === document.getElementById('create-category-modal')) {
+                closeModal();
+            }
+        });
     </script>
 </body>
 </html>
