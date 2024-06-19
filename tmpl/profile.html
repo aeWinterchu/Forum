@@ -74,15 +74,13 @@
     <div class="profile-container">
         <h1>User Profile</h1>
         <div class="profile-details">
-            <p><span>Username:</span> johndoe</p>
-            <p><span>Email:</span> johndoe@example.com</p>
-            <p><span>Full Name:</span> John Doe</p>
-            <p><span>Joined:</span> January 1, 2023</p>
+            <p><span>Username:</span> {{ .Username }}</p>
+            <p><span>Email:</span> {{ .Email }}</p>
+            <p><span>Password:</span> *********</p>
         </div>
         <div>
             <button class="edit-button" onclick="window.location.href='editProfile.html'">Edit Profile</button>
-            <button class="activity-button" onclick="window.location.href='accountActivity.html'">Account Activity</button>
-            <button class="logout-button" onclick="window.location.href='logout.html'">Logout</button>
+            <button class="logout-button" onclick="window.location.href='/logout'">Logout</button>
         </div>
     </div>
 </body>

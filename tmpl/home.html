@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum Home - Asian Food Theme</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #fff3e0;
+            color: #333;
+        }
+
+        .header {
+            background-color: #d32f2f;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        .user-profile-container {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        .user-profile {
+            background-color: #d32f2f;
+            border: none;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .user-profile:hover {
+            background-color: #b71c1c;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            right: 0;
+            top: 40px;
+            z-index: 20;
+            text-align: left;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            border-bottom: 1px solid #ddd;
+            transition: background-color 0.3s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+        }
+        
+        .nav {
+            background-color: #b71c1c;
+            overflow: hidden;
+            border-radius: 0 0 10px 10px;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        .nav a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 5px;
+            margin: 0 5px;
+            transition: background-color 0.3s;
+        }
+
+        .nav a:hover {
+            background-color: #d32f2f;
+        }
+        
+        .container {
+            padding: 20px;
+        }
+
+        .forum-section {
+            margin-bottom: 30px;
+        }
+
+        .forum-section h2 {
+            color: #d32f2f;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .forum-category {
+            display: inline-block;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 15px;
+            margin-right: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .forum-category:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .forum-category h3 {
+            margin: 0;
+            font-size: 24px;
+            color: #b71c1c;
+        }
+
+        .forum-category p {
+            margin: 5px 0 0;
+            color: #757575;
+        }
+
+        .footer {
+            background-color: #d32f2f;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <script>
+        function showDropdown() {
+            document.getElementById("dropdown").style.display = "block";
+        }
+
+        function hideDropdown() {
+            document.getElementById("dropdown").style.display = "none";
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <h1>Asian'Gourmet</h1>
+        <div class="user-profile-container" onmouseover="showDropdown()" onmouseout="hideDropdown()">
+            {{ if .LoggedIn }}
+                <button class="user-profile">
+                    <img src="https://img.icons8.com/material-outlined/24/ffffff/user.png" alt="Profile" class="icon">
+                </button>
+                <div class="dropdown-content" id="dropdown">
+                    <a href="/profile">Profile</a>
+                    <a href="/logout">Logout</a>
+                </div>
+            {{ else }}
+                <button class="user-profile">
+                    <img src="https://img.icons8.com/material-outlined/24/ffffff/user.png" alt="Profile" class="icon">
+                </button>
+                <div class="dropdown-content" id="dropdown">
+                    <a href="/register">Register</a>
+                    <a href="/login">Login</a>
+                </div>
+            {{ end }}
+        </div>
+    </div>    
+    <div class="nav">
+        <a href="/home">Home</a>
+        <a href="/category">Categories</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </div>
+    <div class="container">
+        <h2>Categories</h2>
+        {{ range .Categories }}
+        <div class="forum-section">
+            <div class="forum-category">
+                <a href="/postInCategory/{{ .ID }}"><h3>{{ .Name }}</h3></a>
+                    <p>Press to see more informations.</p>
+                </a>
+            </div>
+        </div>
+        {{ end }}
+    </div>
+    <div class="footer">
+        &copy; 2024 Asian Food Forum. All rights reserved.
+    </div>
+</body>
+</html>
