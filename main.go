@@ -354,57 +354,39 @@ func saveCategoryHandler(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-type CategoryPageHandler struct{}
+type CategoryHandler struct{}
 
-func (h *CategoryPageHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	// Récupérer l'ID de la catégorie à partir de l'URL
-	parts := strings.Split(r.URL.Path, "/")
-	if len(parts) < 3 {
-		http.Error(w, "Category not found", http.StatusBadRequest)
-		return
-	}
-	categoryID := parts[2]
-
-	// Récupérer le nom de la catégorie depuis la base de données
-	var categoryName string
-	err := db.QueryRow("SELECT name FROM categories WHERE id = ?", categoryID).Scan(&categoryName)
-	if err != nil {
-		if err == sql.ErrNoRows {
-			http.Error(w, "Category not found", http.StatusNotFound)
-		} else {
-			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-			log.Println("Error retrieving category name:", err)
-		}
-		return
-	}
-
-	// Récupérer les informations de la catégorie et les afficher
+func (h *CategoryHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	tmpl, err := template.ParseFiles("tmpl/category.html")
 	if err != nil {
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		log.Println("Error parsing template:", err)
 		return
 	}
-
-	tmpl.Execute(w, map[string]interface{}{
-		"CategoryID":   categoryID,
-		"CategoryName": categoryName,
-	})
+	tmpl.Execute(w, nil)
 }
 
 type PostInCategoryHandler struct{}
 
 func (h *PostInCategoryHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	// Récupérer l'ID de la catégorie à partir de l'URL
+	// Récupérer le nom de la catégorie à partir de l'URL
 	parts := strings.Split(r.URL.Path, "/")
 	if len(parts) < 3 {
 		http.Error(w, "Category not found", http.StatusBadRequest)
 		return
 	}
-	categoryID := parts[2]
+	categoryName := parts[2]
+
+	// Récupérer l'ID de la catégorie
+	categoryID, err := getCategoryID(categoryName)
+	if err != nil {
+		http.Error(w, "Category not found", http.StatusNotFound)
+		log.Println("Error retrieving category ID:", err)
+		return
+	}
 
 	// Rediriger l'utilisateur vers la page de la catégorie spécifiée
-	http.Redirect(w, r, fmt.Sprintf("/category/%s", categoryID), http.StatusSeeOther)
+	http.Redirect(w, r, fmt.Sprintf("/postInCategory/%d", categoryID), http.StatusSeeOther)
 }
 
 func getCategoryID(categoryName string) (int, error) {
@@ -430,7 +412,7 @@ func main() {
 	http.Handle("/category", &CategoryHandler{})
 	http.Handle("/postInCategory/", &PostInCategoryHandler{})
 	http.HandleFunc("/save-category", saveCategoryHandler)
-	http.Handle("/category/", &CategoryPageHandler{})
+	http.Handle("/category/", &CategoryHandler{})
 
 	fmt.Println("Server is running on port 1414")
 	fmt.Println("http://localhost:1414/home")
